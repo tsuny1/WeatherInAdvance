@@ -9,45 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "weekly/InfoCell.swift"
-            timestampString = "523430089.538656"
+            filePath = "weekly/AppDelegate.swift"
+            timestampString = "525460819.225586"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "setChosenToBeTrue()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "weekly/InfoCell.swift"
-            timestampString = "523430091.691965"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "6"
-            endingLineNumber = "6"
-            landmarkName = "init(frame:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "weekly/InfoCell.swift"
-            timestampString = "523430092.836207"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "7"
-            endingLineNumber = "7"
-            landmarkName = "init(frame:)"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "getData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "weekly/InfoCell.swift"
-            timestampString = "523430094.032752"
+            filePath = "weekly/AppDelegate.swift"
+            timestampString = "525460819.225586"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "init(frame:)"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "checkTimeMatch(result:storedData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "weekly/InfoCell.swift"
-            timestampString = "523430095.16886"
+            filePath = "weekly/AppDelegate.swift"
+            timestampString = "525460819.225586"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "setupViews()"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "checkTimeMatch(result:storedData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "weekly/CategoryCell.swift"
-            timestampString = "523500742.683038"
+            filePath = "weekly/AppDelegate.swift"
+            timestampString = "525460819.225586"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "setupViews()"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "checkTimeMatch(result:storedData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -7,33 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F1231E31F3782A900C25097 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1231E21F3782A900C25097 /* Helper.swift */; };
 		3F18648B1F259E69005FFF22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F18648A1F259E69005FFF22 /* AppDelegate.swift */; };
 		3F18648D1F259E69005FFF22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F18648C1F259E69005FFF22 /* ViewController.swift */; };
 		3F1864921F259E69005FFF22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F1864911F259E69005FFF22 /* Assets.xcassets */; };
 		3F1864951F259E69005FFF22 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F1864931F259E69005FFF22 /* LaunchScreen.storyboard */; };
-		3F18649D1F25A261005FFF22 /* WeeklyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F18649C1F25A261005FFF22 /* WeeklyButton.swift */; };
 		3F18649F1F25BB7C005FFF22 /* WeeklyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F18649E1F25BB7C005FFF22 /* WeeklyController.swift */; };
-		3F1864A11F28396A005FFF22 /* weeklyCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1864A01F28396A005FFF22 /* weeklyCollectionViewLayout.swift */; };
+		3F49BB871F369B1C00F670C0 /* DailyTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F49BB861F369B1C00F670C0 /* DailyTimes.swift */; };
+		3F57028F1F5035AE00F098C7 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F57028E1F5035AE00F098C7 /* Weather.swift */; };
+		3F5702931F51E53C00F098C7 /* WeeklyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5702921F51E53C00F098C7 /* WeeklyLayout.swift */; };
+		3F5702971F51FA6000F098C7 /* Slots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5702961F51FA6000F098C7 /* Slots.swift */; };
 		3FB9E6E31F2DA3850000FE80 /* TimeLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9E6E21F2DA3850000FE80 /* TimeLabelCell.swift */; };
 		3FB9E6E51F2DA3A50000FE80 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9E6E41F2DA3A50000FE80 /* InfoCell.swift */; };
-		3FB9E6E71F2DA3FF0000FE80 /* WishListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9E6E61F2DA3FF0000FE80 /* WishListHeaderView.swift */; };
+		3FB9E6E71F2DA3FF0000FE80 /* WeeklyViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9E6E61F2DA3FF0000FE80 /* WeeklyViewHeader.swift */; };
 		3FB9E6E91F2DA47F0000FE80 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9E6E81F2DA47F0000FE80 /* CategoryCell.swift */; };
+		3FE8D30F1F3DF8F8007A5303 /* weeklySlots.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FE8D30D1F3DF8F7007A5303 /* weeklySlots.xcdatamodeld */; };
+		3FE8D3291F3E63CF007A5303 /* SlotEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE8D3251F3E63CF007A5303 /* SlotEntity+CoreDataClass.swift */; };
+		3FE8D32A1F3E63CF007A5303 /* SlotEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE8D3261F3E63CF007A5303 /* SlotEntity+CoreDataProperties.swift */; };
+		3FE8D32B1F3E63CF007A5303 /* DailyTimesEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE8D3271F3E63CF007A5303 /* DailyTimesEntity+CoreDataClass.swift */; };
+		3FE8D32C1F3E63CF007A5303 /* DailyTimesEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE8D3281F3E63CF007A5303 /* DailyTimesEntity+CoreDataProperties.swift */; };
+		3FE8D32E1F3E6989007A5303 /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE8D32D1F3E6989007A5303 /* DatabaseController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F1231E21F3782A900C25097 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		3F1864871F259E69005FFF22 /* weekly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weekly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F18648A1F259E69005FFF22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F18648C1F259E69005FFF22 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3F1864911F259E69005FFF22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F1864941F259E69005FFF22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F1864961F259E69005FFF22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F18649C1F25A261005FFF22 /* WeeklyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeeklyButton.swift; sourceTree = "<group>"; };
 		3F18649E1F25BB7C005FFF22 /* WeeklyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeeklyController.swift; sourceTree = "<group>"; };
-		3F1864A01F28396A005FFF22 /* weeklyCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = weeklyCollectionViewLayout.swift; sourceTree = "<group>"; };
+		3F49BB861F369B1C00F670C0 /* DailyTimes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyTimes.swift; sourceTree = "<group>"; };
+		3F57028E1F5035AE00F098C7 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		3F5702921F51E53C00F098C7 /* WeeklyLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeeklyLayout.swift; sourceTree = "<group>"; };
+		3F5702961F51FA6000F098C7 /* Slots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slots.swift; sourceTree = "<group>"; };
 		3FB9E6E21F2DA3850000FE80 /* TimeLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabelCell.swift; sourceTree = "<group>"; };
 		3FB9E6E41F2DA3A50000FE80 /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
-		3FB9E6E61F2DA3FF0000FE80 /* WishListHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListHeaderView.swift; sourceTree = "<group>"; };
+		3FB9E6E61F2DA3FF0000FE80 /* WeeklyViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeeklyViewHeader.swift; sourceTree = "<group>"; };
 		3FB9E6E81F2DA47F0000FE80 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		3FE8D30E1F3DF8F7007A5303 /* weeklySlots.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = weeklySlots.xcdatamodel; sourceTree = "<group>"; };
+		3FE8D3251F3E63CF007A5303 /* SlotEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SlotEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3FE8D3261F3E63CF007A5303 /* SlotEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SlotEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3FE8D3271F3E63CF007A5303 /* DailyTimesEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DailyTimesEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3FE8D3281F3E63CF007A5303 /* DailyTimesEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DailyTimesEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3FE8D32D1F3E6989007A5303 /* DatabaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,10 +65,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F1231DE1F3778C700C25097 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				3F5702921F51E53C00F098C7 /* WeeklyLayout.swift */,
+			);
+			name = Layouts;
+			sourceTree = "<group>";
+		};
+		3F1231E11F37829C00C25097 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				3F1231E21F3782A900C25097 /* Helper.swift */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
 		3F18647E1F259E69005FFF22 = {
 			isa = PBXGroup;
 			children = (
-				3F1864891F259E69005FFF22 /* weekly */,
+				3F5702941F51E6C100F098C7 /* CoreDataModel */,
+				3F1864891F259E69005FFF22 /* WeatherNotifier */,
 				3F1864881F259E69005FFF22 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,31 +98,64 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3F1864891F259E69005FFF22 /* weekly */ = {
+		3F1864891F259E69005FFF22 /* WeatherNotifier */ = {
 			isa = PBXGroup;
 			children = (
-				3FB9E6DF1F2DA2EF0000FE80 /* calendarViews */,
+				3F1231E11F37829C00C25097 /* Helper */,
+				3F1231DE1F3778C700C25097 /* Layouts */,
+				3F49BB851F369AE800F670C0 /* Models */,
+				3FB9E6DF1F2DA2EF0000FE80 /* CalendarViews */,
 				3F18648A1F259E69005FFF22 /* AppDelegate.swift */,
-				3F18648C1F259E69005FFF22 /* ViewController.swift */,
+				3F5702951F51E6FC00F098C7 /* ViewControllers */,
 				3F1864911F259E69005FFF22 /* Assets.xcassets */,
 				3F1864931F259E69005FFF22 /* LaunchScreen.storyboard */,
 				3F1864961F259E69005FFF22 /* Info.plist */,
-				3F18649C1F25A261005FFF22 /* WeeklyButton.swift */,
-				3F18649E1F25BB7C005FFF22 /* WeeklyController.swift */,
-				3F1864A01F28396A005FFF22 /* weeklyCollectionViewLayout.swift */,
 			);
+			name = WeatherNotifier;
 			path = weekly;
 			sourceTree = "<group>";
 		};
-		3FB9E6DF1F2DA2EF0000FE80 /* calendarViews */ = {
+		3F49BB851F369AE800F670C0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3F57028E1F5035AE00F098C7 /* Weather.swift */,
+				3F49BB861F369B1C00F670C0 /* DailyTimes.swift */,
+				3F5702961F51FA6000F098C7 /* Slots.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		3F5702941F51E6C100F098C7 /* CoreDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				3FE8D3251F3E63CF007A5303 /* SlotEntity+CoreDataClass.swift */,
+				3FE8D3261F3E63CF007A5303 /* SlotEntity+CoreDataProperties.swift */,
+				3FE8D3271F3E63CF007A5303 /* DailyTimesEntity+CoreDataClass.swift */,
+				3FE8D3281F3E63CF007A5303 /* DailyTimesEntity+CoreDataProperties.swift */,
+				3FE8D32D1F3E6989007A5303 /* DatabaseController.swift */,
+				3FE8D30D1F3DF8F7007A5303 /* weeklySlots.xcdatamodeld */,
+			);
+			name = CoreDataModel;
+			sourceTree = "<group>";
+		};
+		3F5702951F51E6FC00F098C7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3F18648C1F259E69005FFF22 /* ViewController.swift */,
+				3F18649E1F25BB7C005FFF22 /* WeeklyController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3FB9E6DF1F2DA2EF0000FE80 /* CalendarViews */ = {
 			isa = PBXGroup;
 			children = (
 				3FB9E6E21F2DA3850000FE80 /* TimeLabelCell.swift */,
 				3FB9E6E41F2DA3A50000FE80 /* InfoCell.swift */,
-				3FB9E6E61F2DA3FF0000FE80 /* WishListHeaderView.swift */,
+				3FB9E6E61F2DA3FF0000FE80 /* WeeklyViewHeader.swift */,
 				3FB9E6E81F2DA47F0000FE80 /* CategoryCell.swift */,
 			);
-			name = calendarViews;
+			name = CalendarViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +191,11 @@
 					3F1864861F259E69005FFF22 = {
 						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -161,14 +234,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FE8D32B1F3E63CF007A5303 /* DailyTimesEntity+CoreDataClass.swift in Sources */,
+				3FE8D32C1F3E63CF007A5303 /* DailyTimesEntity+CoreDataProperties.swift in Sources */,
+				3FE8D32A1F3E63CF007A5303 /* SlotEntity+CoreDataProperties.swift in Sources */,
+				3F1231E31F3782A900C25097 /* Helper.swift in Sources */,
+				3F57028F1F5035AE00F098C7 /* Weather.swift in Sources */,
+				3FE8D3291F3E63CF007A5303 /* SlotEntity+CoreDataClass.swift in Sources */,
 				3FB9E6E31F2DA3850000FE80 /* TimeLabelCell.swift in Sources */,
+				3FE8D30F1F3DF8F8007A5303 /* weeklySlots.xcdatamodeld in Sources */,
+				3F5702931F51E53C00F098C7 /* WeeklyLayout.swift in Sources */,
+				3F5702971F51FA6000F098C7 /* Slots.swift in Sources */,
+				3F49BB871F369B1C00F670C0 /* DailyTimes.swift in Sources */,
 				3F18648D1F259E69005FFF22 /* ViewController.swift in Sources */,
-				3F18649D1F25A261005FFF22 /* WeeklyButton.swift in Sources */,
 				3F18649F1F25BB7C005FFF22 /* WeeklyController.swift in Sources */,
-				3F1864A11F28396A005FFF22 /* weeklyCollectionViewLayout.swift in Sources */,
 				3FB9E6E91F2DA47F0000FE80 /* CategoryCell.swift in Sources */,
 				3F18648B1F259E69005FFF22 /* AppDelegate.swift in Sources */,
-				3FB9E6E71F2DA3FF0000FE80 /* WishListHeaderView.swift in Sources */,
+				3FE8D32E1F3E6989007A5303 /* DatabaseController.swift in Sources */,
+				3FB9E6E71F2DA3FF0000FE80 /* WeeklyViewHeader.swift in Sources */,
 				3FB9E6E51F2DA3A50000FE80 /* InfoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,6 +410,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3FE8D30D1F3DF8F7007A5303 /* weeklySlots.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3FE8D30E1F3DF8F7007A5303 /* weeklySlots.xcdatamodel */,
+			);
+			currentVersion = 3FE8D30E1F3DF8F7007A5303 /* weeklySlots.xcdatamodel */;
+			path = weeklySlots.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3F18647F1F259E69005FFF22 /* Project object */;
 }

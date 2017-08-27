@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DailyTimesEntity" representedClassName=".DailyTimesEntity" syncable="YES">
+        <attribute name="dayOfTheWeek" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="slots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SlotEntity" inverseName="dailyTimes" inverseEntity="SlotEntity" syncable="YES"/>
+    </entity>
+    <entity name="SlotEntity" representedClassName=".SlotEntity" syncable="YES">
+        <attribute name="beginningTimeHour" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="beginningTimeMinute" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="dayOfTheWeek" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="endTimeHour" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="endTimeMinute" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="dailyTimes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailyTimesEntity" inverseName="slots" inverseEntity="DailyTimesEntity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="SlotEntity" positionX="448" positionY="89" width="128" height="163"/>
+        <element name="DailyTimesEntity" positionX="169" positionY="36" width="128" height="73"/>
+    </elements>
+</model>
