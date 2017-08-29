@@ -1,3 +1,4 @@
+
 import UIKit
 import EventKit
 import CoreData
@@ -12,7 +13,8 @@ class weeklyViewController: UICollectionViewController,UICollectionViewDelegateF
     var startTime: TimeInterval = 0.0
     var startingIndex = -1
     var endingIndex = -1
-    var previousSection = -1
+    var beginningSection = -1
+    var endSection = -1
     var deletePrevious = false
     var validStartingPosition = true
     var arrayOfChecked = [[Bool]] ()
@@ -20,12 +22,12 @@ class weeklyViewController: UICollectionViewController,UICollectionViewDelegateF
     let eventStore = EKEventStore()
     var calendars: [EKCalendar]?
     
-   
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpWeeklySlots()
-    
         arrayOfChecked = Array(repeating: Array(repeating: false, count: timeArray.count * 4), count: daysOfTheWeek.count)
         myCollectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         myCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "myCollectionViewCell")
@@ -40,7 +42,7 @@ class weeklyViewController: UICollectionViewController,UICollectionViewDelegateF
         let tap = UILongPressGestureRecognizer(target: self, action: #selector(self.handleTap(sender:)))
         tap.delegate = self
         myCollectionView.addGestureRecognizer(tap)
-        
+        myCollectionView.frame = CGRect(x: 0 ,y: 0, width: self.view.frame.width, height: self.view.frame.height - 64)
         let touch = UITapGestureRecognizer(target: self, action: #selector(self.handleTouch(sender:)))
         touch.delegate = self
         myCollectionView.addGestureRecognizer(touch)
@@ -49,7 +51,7 @@ class weeklyViewController: UICollectionViewController,UICollectionViewDelegateF
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       
+        
         checkCalendarAuthorizationStatus()
     }
     func checkCalendarAuthorizationStatus() {
@@ -58,102 +60,56 @@ class weeklyViewController: UICollectionViewController,UICollectionViewDelegateF
         switch (status) {
         case EKAuthorizationStatus.authorized:
             setUpTable()
-
+            
             break
             // Things are in line with being able to show the calendars in the table view
-
+            
         default: break
             
         }
     }
-//    /Users/WillY/weekly/weekly/WeeklyController.swift:106:89: 'NSGregorianCalendar' was deprecated in iOS 8.0: Use NSCalendarIdentifierGregorian instead
-    func getDayOfWeek(date: Date)->Int? {
+    func isSaveButtonDisabled() -> Bool {
+        if(startingIndex == -1 || endingIndex == -1) {
+            return true
+        }
+        return false
+    }
+    
+    
+    func getDayOfWeek(date: Date) -> Int? {
         let myCalendar = NSCalendar.current
         let myComponents = myCalendar.dateComponents([.day,.month,.year,.weekday], from: Date())
         let weekDay = myComponents.weekday
         return weekDay
     }
     
-        func setUpTable(){
-             self.calendars = eventStore.calendars(for: EKEntityType.event)
-            let oneMonthAgo = Date()
-            let oneMonthAfter = NSDate(timeIntervalSinceNow: +4*24*3600)
-            do{
-                   let fetchRequest:NSFetchRequest<SlotEntity> = SlotEntity.fetchRequest()
-//                let p1 = NSPredicate(format: "beginningTimeHour == %d", 8)
-//                let p2 = NSPredicate(format: "endTimeHour == %d", 11)
-//
-//                let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [p1,p2])
-//                fetchRequest.predicate = predicate
-
-                let searchResults = try DatabaseController.getContext().fetch(fetchRequest)
-//
-//
-//                
-                
-                                for result in searchResults as [SlotEntity]{
-                    let dayOfTheWeek = Int(result.dayOfTheWeek)
-                    let beginningTimeHour = Int(result.beginningTimeHour)
-                    let beginningTimeMinute = Int(result.beginningTimeMinute)
-                    let endTimeHour = Int(result.endTimeHour)
-                    let endTimeMinute = Int(result.endTimeMinute)
-                    let name = result.name
-                    let location = result.location
-                    let newBlock = Slots(name: name!, location: location!, beginningTimeHour: beginningTimeHour, beginningTimeMinute:beginningTimeMinute, endingTimeHour: endTimeHour, endingTimeMinute: endTimeMinute, dayOfTheWeek:dayOfTheWeek)
-                    weeklySlots[dayOfTheWeek].addTime(newTime: newBlock)
-
-                
-                
-                
-                }
+    func setUpTable(){
+        self.calendars = eventStore.calendars(for: EKEntityType.event)
+        do{
+            let fetchRequest:NSFetchRequest<SlotEntity> = SlotEntity.fetchRequest()
+      
+            
+            let searchResults = try DatabaseController.getContext().fetch(fetchRequest)
+       
+            for result in searchResults as [SlotEntity]{
+                let dayOfTheWeek = Int(result.dayOfTheWeek) % 7
+                let beginningTimeHour = Int(result.beginningTimeHour)
+                let beginningTimeMinute = Int(result.beginningTimeMinute)
+                let endTimeHour = Int(result.endTimeHour)
+                let endTimeMinute = Int(result.endTimeMinute)
+                let name = result.name
+                let location = result.location
+                let newBlock = Slots(name: name!, location: location!, beginningTimeHour: beginningTimeHour, beginningTimeMinute:beginningTimeMinute, endingTimeHour: endTimeHour, endingTimeMinute: endTimeMinute, dayOfTheWeek:dayOfTheWeek)
+                weeklySlots[dayOfTheWeek].addTime(newTime: newBlock)
             }
-            catch{
-                print("Error: \(error)")
-            }
-
-            for calendar in calendars! {
-                
-                
-                    let predicate = eventStore.predicateForEvents(withStart: oneMonthAgo as Date, end: oneMonthAfter as Date, calendars: [calendar])
-                    
-                    let events = eventStore.events(matching: predicate)
-                    
-                    for event in events {
-                        
-                        let dayOfTheWeek = getDayOfWeek(date: event.startDate)! as Int - 1
-                        let title = event.title
-                        let location = event.location
-                        let beginningHour = Calendar.current.component(.hour, from: event.startDate)
-                        let beginningMinute = Calendar.current.component(.minute, from: event.startDate)
-                      let endingHour = Calendar.current.component(.hour, from: event.endDate)
- let endingMinute = Calendar.current.component(.minute, from: event.endDate)
-                      
-                        var newOne = Slots(name: title, location: location!, beginningTimeHour: beginningHour, beginningTimeMinute:beginningMinute, endingTimeHour: endingHour, endingTimeMinute: endingMinute, dayOfTheWeek:dayOfTheWeek)
-                        
-                                let fetchRequest:NSFetchRequest<SlotEntity> = SlotEntity.fetchRequest()
-//
-//                        
-//                        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
-//                        
-//                         do {
-//                           let result = try DatabaseController.getContext().execute(deleteRequest)
-//                        } catch {
-//                            
-//                        }
-                        
-                        
-             
-//                        weeklySlots[dayOfTheWeek].addTime(newTime:newOne )
-                        
-                }
-                
-                
-            }
-    
         }
+        catch{
+            print("Error: \(error)")
+        }
+    }
+    
     func updateCoreData(){
         let slotEntityClassName:String = String(describing: SlotEntity.self)
-        let fetchRequest:NSFetchRequest<SlotEntity> = SlotEntity.fetchRequest()
         
         for i in 0 ..< weeklySlots.count {
             for j in 0 ..< weeklySlots[i].schedule.count {
@@ -161,141 +117,145 @@ class weeklyViewController: UICollectionViewController,UICollectionViewDelegateF
                 
                 let currentBlock = weeklySlots[i].schedule[j]
                 let fetchRequest:NSFetchRequest<SlotEntity> = SlotEntity.fetchRequest()
-               
-                                let p1 = NSPredicate(format: "beginningTimeHour == %d", currentBlock.beginningTimeHour)
-                                let p2 = NSPredicate(format: "endTimeHour == %d", currentBlock.endingTimeHour)
                 
-                                let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [p1,p2])
-                                fetchRequest.predicate = predicate
+                let p1 = NSPredicate(format: "beginningTimeHour == %d", currentBlock.beginningTimeHour)
+                let p2 = NSPredicate(format: "endTimeHour == %d", currentBlock.endingTimeHour)
+                
+                let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [p1,p2])
+                fetchRequest.predicate = predicate
                 do {
-                let fetchResults = try DatabaseController.getContext().fetch(fetchRequest)
-                if fetchResults.count == 0 {
-                    let sampleSlotEntity = NSEntityDescription.insertNewObject(forEntityName: slotEntityClassName, into: DatabaseController.getContext()) as! SlotEntity
-       
-                   sampleSlotEntity.beginningTimeHour = Int16(currentBlock.beginningTimeHour)
-                    sampleSlotEntity.beginningTimeMinute = Int16(currentBlock.beginningTimeMinute)
-                
-                    sampleSlotEntity.endTimeHour = Int16(currentBlock.endingTimeHour)
-                    sampleSlotEntity.endTimeMinute = Int16(currentBlock.endingTimeMinute)
-                    sampleSlotEntity.dayOfTheWeek = Int16(currentBlock.dayOfTheWeek)
-                    sampleSlotEntity.name = currentBlock.name
-                    sampleSlotEntity.location = currentBlock.location
-                }
-         
+                    let fetchResults = try DatabaseController.getContext().fetch(fetchRequest)
+                    if fetchResults.count == 0 {
+                        let sampleSlotEntity = NSEntityDescription.insertNewObject(forEntityName: slotEntityClassName, into: DatabaseController.getContext()) as! SlotEntity
+                        
+                        sampleSlotEntity.beginningTimeHour = Int16(currentBlock.beginningTimeHour)
+                        sampleSlotEntity.beginningTimeMinute = Int16(currentBlock.beginningTimeMinute)
+                        
+                        sampleSlotEntity.endTimeHour = Int16(currentBlock.endingTimeHour)
+                        sampleSlotEntity.endTimeMinute = Int16(currentBlock.endingTimeMinute)
+                        sampleSlotEntity.dayOfTheWeek = Int16(currentBlock.dayOfTheWeek)
+                        sampleSlotEntity.name = currentBlock.name
+                        sampleSlotEntity.location = currentBlock.location
+                    }
+                    
                 } catch {
                     
                 }
-
-
+                
+                
             }
         }
-//
-//        
+        
         DatabaseController.saveContext()
-        
-//        let p1 = NSPredicate(format: "beginningTimeHour = %@", 8)
-//        let p2 = NSPredicate(format: "endingTimeHour = %@", 10)
-//
-//        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [p1,p2])
-//        
-        
-//        fetchRequest.predicate = predicate
-        
-       do{
-            let fetchResults = try DatabaseController.getContext().fetch(fetchRequest)
-                print(fetchResults.count)
-        
-            
-        }
-        catch{
-        }
-
-           }
-
+    }
+    
     func handleDeleteButton(index: Int) {
         for index in 0 ..< weeklySlots.count {
             for j in 0 ..< weeklySlots[index].schedule.count {
                 if(weeklySlots[index].schedule[j].selected){
+            
                     let startingIndex = Helper.convertTimeToIndex(numberOfSlots: timeArray.count * 4, startingHour: 8, numberOfIntervalsInHour: 4, timeHour: weeklySlots[index].schedule[j].beginningTimeHour, timeMinute: weeklySlots[index].schedule[j].beginningTimeMinute, offset: timeArray.count)
                     let endingIndex = Helper.convertTimeToIndex(numberOfSlots: timeArray.count * 4, startingHour: 8, numberOfIntervalsInHour: 4, timeHour: weeklySlots[index].schedule[j].endingTimeHour, timeMinute: weeklySlots[index].schedule[j].endingTimeMinute, offset: timeArray.count)
-                   let newArray =  Helper.deletePreviousSection(array: arrayOfChecked, section: index, startingI: startingIndex, endingI: endingIndex, offset: timeArray.count)
-                    arrayOfChecked = newArray
-                    
+                    arrayOfChecked =  Helper.deletePreviousSection(array: arrayOfChecked, section: index, startingI: startingIndex, endingI: endingIndex, offset: timeArray.count)
+                    let currentBlock = weeklySlots[index].schedule[j]
                     weeklySlots[index].schedule.remove(at: j)
-                    let slotEntityClassName:String = String(describing: SlotEntity.self)
                     let fetchRequest:NSFetchRequest<SlotEntity> = SlotEntity.fetchRequest()
-
-                    let startingTimeHourConverted = Helper.convertIndexToTimeHour(numberOfSlots: 60, startingHour: 8, numberOfIntervalsInHour: 4, index: startingIndex, offset: self.timeArray.count)
-                    let endTimeHourConverted = Helper.convertIndexToTimeHour(numberOfSlots: 60, startingHour: 8, numberOfIntervalsInHour: 4, index: endingIndex, offset: self.timeArray.count)
-                    
-                    let p1 = NSPredicate(format: "beginningTimeHour == %d", startingTimeHourConverted)
-                    let p2 = NSPredicate(format: "endTimeHour == %d", endTimeHourConverted)
+      
+                    let p1 = NSPredicate(format: "beginningTimeHour == %d", currentBlock.beginningTimeHour)
+                    let p2 = NSPredicate(format: "endTimeHour == %d", currentBlock.endingTimeHour)
                     
                     let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [p1,p2])
                     fetchRequest.predicate = predicate
-                    let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+                    
+                    let context = DatabaseController.getContext()
+                  
                     do {
-                     try DatabaseController.getContext().execute(deleteRequest)
+                        let fetchResults = try DatabaseController.getContext().fetch(fetchRequest)
+                        for object in fetchResults {
+                            context.delete(object)
+                        }
+                    }
+                    catch
+                    {
+                    }
+                  
+                    DatabaseController.saveContext()
+                    myCollectionView.reloadData()
 
-                    }
-                    catch {
-                        
-                    }
+                    return
                 }
             }
             
         }
-        myCollectionView.reloadData()
     }
     
     func didPressButton(index:Int) {
-        
-//        weeklySlots[0].addTime(newTime: Slots(name: "asd", location: "asdasd", beginningTimeHour: 10, beginningTimeMinute: 15, endingTimeHour: 11, endingTimeMinute: 30))
-//        myCollectionView.reloadData()
-        let ac : UIAlertController = {
-            let alertController = UIAlertController( title: "Edit Device Name", message: "Enter a new nickname for your device:", preferredStyle: .alert)
-            alertController.addTextField(configurationHandler: {
-                (textField: UITextField) in
-                textField.placeholder = "Name"
-            })
-            alertController.addTextField { (textField : UITextField!) -> Void in
-                textField.placeholder = "Location"
-            }
-            let saveAction = UIAlertAction(title:"Save", style: .default, handler: {
-                action in
-                let nameField = alertController.textFields!.first!.text!
-                let locationField = alertController.textFields![1].text!
-                let startingTimeHour = Helper.convertIndexToTimeHour(numberOfSlots: 60, startingHour: 8, numberOfIntervalsInHour: 4, index: self.startingIndex, offset: self.timeArray.count)
-                let startingTimeMinute = Helper.convertIndexToTimeMinute(numberOfSlots: 60, startingHour: 8, numberOfIntervalsInHour: 4, index: self.startingIndex, offset: self.timeArray.count)
-                let endingTimeHour = Helper.convertIndexToTimeHour(numberOfSlots: 60, startingHour: 8, numberOfIntervalsInHour: 4, index: self.endingIndex  + 1, offset: self.timeArray.count)
-                 let endingTimeMinute = Helper.convertIndexToTimeMinute(numberOfSlots: 60, startingHour: 8, numberOfIntervalsInHour: 4, index: self.endingIndex  + 1, offset: self.timeArray.count)
-                
-                self.weeklySlots[self.previousSection].addTime(newTime: Slots(name: nameField, location: locationField, beginningTimeHour: startingTimeHour, beginningTimeMinute: startingTimeMinute, endingTimeHour: endingTimeHour, endingTimeMinute: endingTimeMinute, dayOfTheWeek: self.previousSection))
+        if isSaveButtonDisabled() == false {
+            let ac : UIAlertController = {
+                let alertController = UIAlertController( title: "Edit Device Name", message: "Enter a new nickname for your device:", preferredStyle: .alert)
 
-                self.setPartialState()
-                
-                self.updateCoreData()
-                self.myCollectionView.reloadData()
-                
-                
-                
-            })
-            alertController.addAction(UIAlertAction(title:"Cancel", style: .cancel, handler: { action in }))
+                let saveAction = UIAlertAction(title:"Save", style: .default, handler: {
+                    action in
             
-            alertController.addAction(saveAction)
-            return alertController
-        }()
-        myCollectionView.reloadData()
-        self.present(ac, animated: true)
+                    let nameField = alertController.textFields!.first!.text!
+                    let locationField = alertController.textFields![1].text!
+                    let startingTimeHour = Helper.convertIndexToTimeHour(numberOfSlots: 60, startingHour: 8, numberOfIntervalsInHour: 4, index: self.startingIndex, offset: self.timeArray.count)
+                    let startingTimeMinute = Helper.convertIndexToTimeMinute(numberOfSlots: 60, startingHour: 8, numberOfIntervalsInHour: 4, index: self.startingIndex, offset: self.timeArray.count)
+                    let endingTimeHour = Helper.convertIndexToTimeHour(numberOfSlots: 60, startingHour: 8, numberOfIntervalsInHour: 4, index: self.endingIndex, offset: self.timeArray.count)
+                    let endingTimeMinute = Helper.convertIndexToTimeMinute(numberOfSlots: 60, startingHour: 8, numberOfIntervalsInHour: 4, index: self.endingIndex, offset: self.timeArray.count)
+                    
+                        self.weeklySlots[self.beginningSection].addTime(newTime: Slots(name: nameField, location: locationField, beginningTimeHour: startingTimeHour, beginningTimeMinute: startingTimeMinute, endingTimeHour: endingTimeHour, endingTimeMinute: endingTimeMinute, dayOfTheWeek: self.beginningSection))
+                        print("asdasd")
+                        self.setPartialState()
+                        self.updateCoreData()
+                        self.myCollectionView.reloadData()
+
+                })
+                saveAction.isEnabled = false
+                alertController.addTextField(configurationHandler: { (textField) in
+                    textField.placeholder = "Enter something"
+               
+                })
+                
+                alertController.addTextField(configurationHandler: { (textField) in
+                    textField.placeholder = "Enter something different"
+                    NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { (notification) in
+                        saveAction.isEnabled = alertController.textFields!.first!.text!.characters.count > 0 && alertController.textFields![1].text!.characters.count > 0
+                    }
+                })
+            
+           
+                alertController.addAction(UIAlertAction(title:"Cancel", style: .cancel, handler: { action in }))
+            
+                alertController.addAction(saveAction)
+                
+                return alertController
+            }()
+            myCollectionView.reloadData()
+            self.present(ac, animated: true)
+        }
     }
     
     func setPartialState() {
         self.startingIndex  =  -1
         self.endingIndex = -1
-        self.previousSection = -1
+        self.beginningSection = -1
+        self.endSection = -1
         self.deletePrevious = false
     }
     
+    func checkIfIndexIsAlreadyHighlighted(endIndex:Int, dayOfTheWeek:Int) -> Bool {
+        for i in 0 ..< weeklySlots[dayOfTheWeek].schedule.count {
+            let currentSlot = weeklySlots[dayOfTheWeek].schedule[i]
+            let convertedCurrentBeginningIndex = Helper.convertTimeToIndex(numberOfSlots: 60, startingHour: 8, numberOfIntervalsInHour: 4, timeHour: currentSlot.beginningTimeHour , timeMinute:  currentSlot.beginningTimeMinute,offset: 15)
+            let convertedCurrentEndIndex = Helper.convertTimeToIndex(numberOfSlots: 60, startingHour: 8, numberOfIntervalsInHour: 4, timeHour: currentSlot.endingTimeHour , timeMinute:  currentSlot.beginningTimeMinute,offset: 15)
+            if(endIndex >= convertedCurrentBeginningIndex && endIndex <= convertedCurrentEndIndex){
+                return true
+            }
+            
+        }
+        return false
+    }
     func handleTap(sender: UILongPressGestureRecognizer? = nil) {
         let whichCell = sender?.location(in:myCollectionView)
         if let currentCellIndex =  myCollectionView.indexPathForItem(at: (whichCell)!){
@@ -306,14 +266,14 @@ class weeklyViewController: UICollectionViewController,UICollectionViewDelegateF
                 let nestedIndexUnwrapped = nestedIndex[1] - timeArray.count
                 
                 
-                if(sender?.state == .began) {
+                if(sender?.state == .began ) {
                     if(deletePrevious){
                         arrayOfChecked =   Helper.deletePreviousSection(array: arrayOfChecked, section: section, startingI: startingIndex, endingI: endingIndex, offset: timeArray.count)
                         self.setPartialState()
                     }
-                    if(arrayOfChecked[section][nestedIndexUnwrapped]) {
+                    if(nestedIndexUnwrapped < 0 || arrayOfChecked[section][nestedIndexUnwrapped]) {
                         validStartingPosition = false
-                    } else {                        
+                    } else {
                         validStartingPosition = true
                     }
                     if(validStartingPosition) {
@@ -321,8 +281,8 @@ class weeklyViewController: UICollectionViewController,UICollectionViewDelegateF
                         myCollectionView.reloadData()
                         currentCell.changeCellSelection(index: nestedIndexUnwrapped + timeArray.count)
                         startingIndex = nestedIndexUnwrapped + timeArray.count
-                        previousSection = section
-                                         }
+                        beginningSection = section
+                    }
                     
                 }
                 if(sender?.state == .changed && validStartingPosition) {
@@ -334,14 +294,21 @@ class weeklyViewController: UICollectionViewController,UICollectionViewDelegateF
                 
                 if(sender?.state == .ended && validStartingPosition) {
                     
-                    currentCell.changeCellSelection(index: nestedIndexUnwrapped + timeArray.count)
+                    
+                    
                     endingIndex = Int(nestedIndexUnwrapped) + timeArray.count
-                    arrayOfChecked =  Helper.setSectionToTrue(array: arrayOfChecked, section : section, startingI: startingIndex, endingI: endingIndex, offset: timeArray.count)
+                    if(checkIfIndexIsAlreadyHighlighted(endIndex: Int(nestedIndexUnwrapped) + timeArray.count, dayOfTheWeek: beginningSection) || section != beginningSection) {
+                        arrayOfChecked = Helper.deletePreviousSection(array: arrayOfChecked, section: beginningSection, startingI: startingIndex, endingI: endingIndex, offset: timeArray.count)
+                        
+                    } else {
+                        arrayOfChecked =  Helper.setSectionToTrue(array: arrayOfChecked, section : section, startingI: startingIndex, endingI: endingIndex, offset: timeArray.count)
+                        currentCell.changeCellSelection(index: nestedIndexUnwrapped + timeArray.count)
+                    }
+                    
                     myCollectionView.isScrollEnabled = true
                     myCollectionView.reloadData()
                     deletePrevious = true
                 } else if(sender?.state == .ended) {
-                    
                     validStartingPosition = true
                 }
             }
@@ -368,13 +335,13 @@ class weeklyViewController: UICollectionViewController,UICollectionViewDelegateF
                     
                     self.setPartialState()
                 }
-                if(!arrayOfChecked[currentSection][nestedIndexUnwrapped]) {
+                if(nestedIndexUnwrapped > 0 && !arrayOfChecked[currentSection][nestedIndexUnwrapped]) {
                     arrayOfChecked[currentSection][nestedIndexUnwrapped] = true
                     currentCell.changeCellSelection(index: nestedIndexUnwrapped + timeArray.count)
                     startingIndex =  nestedIndexUnwrapped + timeArray.count
                     endingIndex = startingIndex
                     deletePrevious = true
-                    previousSection = currentSection
+                    beginningSection = currentSection
                 } else {
                     
                     
@@ -426,7 +393,7 @@ class weeklyViewController: UICollectionViewController,UICollectionViewDelegateF
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return  CGSize(width: view.frame.width, height: view.frame.height / 16)
+        return  CGSize(width: view.frame.width, height: view.frame.height/16)
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,

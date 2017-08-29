@@ -17,8 +17,8 @@
 		3F57028F1F5035AE00F098C7 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F57028E1F5035AE00F098C7 /* Weather.swift */; };
 		3F5702931F51E53C00F098C7 /* WeeklyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5702921F51E53C00F098C7 /* WeeklyLayout.swift */; };
 		3F5702971F51FA6000F098C7 /* Slots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5702961F51FA6000F098C7 /* Slots.swift */; };
-		3FB9E6E31F2DA3850000FE80 /* TimeLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9E6E21F2DA3850000FE80 /* TimeLabelCell.swift */; };
-		3FB9E6E51F2DA3A50000FE80 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9E6E41F2DA3A50000FE80 /* InfoCell.swift */; };
+		3FB9E6E31F2DA3850000FE80 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9E6E21F2DA3850000FE80 /* LabelCell.swift */; };
+		3FB9E6E51F2DA3A50000FE80 /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9E6E41F2DA3A50000FE80 /* TimeCell.swift */; };
 		3FB9E6E71F2DA3FF0000FE80 /* WeeklyViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9E6E61F2DA3FF0000FE80 /* WeeklyViewHeader.swift */; };
 		3FB9E6E91F2DA47F0000FE80 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB9E6E81F2DA47F0000FE80 /* CategoryCell.swift */; };
 		3FE8D30F1F3DF8F8007A5303 /* weeklySlots.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FE8D30D1F3DF8F7007A5303 /* weeklySlots.xcdatamodeld */; };
@@ -42,8 +42,8 @@
 		3F57028E1F5035AE00F098C7 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		3F5702921F51E53C00F098C7 /* WeeklyLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeeklyLayout.swift; sourceTree = "<group>"; };
 		3F5702961F51FA6000F098C7 /* Slots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slots.swift; sourceTree = "<group>"; };
-		3FB9E6E21F2DA3850000FE80 /* TimeLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabelCell.swift; sourceTree = "<group>"; };
-		3FB9E6E41F2DA3A50000FE80 /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
+		3FB9E6E21F2DA3850000FE80 /* LabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
+		3FB9E6E41F2DA3A50000FE80 /* TimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
 		3FB9E6E61F2DA3FF0000FE80 /* WeeklyViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeeklyViewHeader.swift; sourceTree = "<group>"; };
 		3FB9E6E81F2DA47F0000FE80 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		3FE8D30E1F3DF8F7007A5303 /* weeklySlots.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = weeklySlots.xcdatamodel; sourceTree = "<group>"; };
@@ -150,8 +150,8 @@
 		3FB9E6DF1F2DA2EF0000FE80 /* CalendarViews */ = {
 			isa = PBXGroup;
 			children = (
-				3FB9E6E21F2DA3850000FE80 /* TimeLabelCell.swift */,
-				3FB9E6E41F2DA3A50000FE80 /* InfoCell.swift */,
+				3FB9E6E21F2DA3850000FE80 /* LabelCell.swift */,
+				3FB9E6E41F2DA3A50000FE80 /* TimeCell.swift */,
 				3FB9E6E61F2DA3FF0000FE80 /* WeeklyViewHeader.swift */,
 				3FB9E6E81F2DA47F0000FE80 /* CategoryCell.swift */,
 			);
@@ -240,7 +240,7 @@
 				3F1231E31F3782A900C25097 /* Helper.swift in Sources */,
 				3F57028F1F5035AE00F098C7 /* Weather.swift in Sources */,
 				3FE8D3291F3E63CF007A5303 /* SlotEntity+CoreDataClass.swift in Sources */,
-				3FB9E6E31F2DA3850000FE80 /* TimeLabelCell.swift in Sources */,
+				3FB9E6E31F2DA3850000FE80 /* LabelCell.swift in Sources */,
 				3FE8D30F1F3DF8F8007A5303 /* weeklySlots.xcdatamodeld in Sources */,
 				3F5702931F51E53C00F098C7 /* WeeklyLayout.swift in Sources */,
 				3F5702971F51FA6000F098C7 /* Slots.swift in Sources */,
@@ -251,7 +251,7 @@
 				3F18648B1F259E69005FFF22 /* AppDelegate.swift in Sources */,
 				3FE8D32E1F3E6989007A5303 /* DatabaseController.swift in Sources */,
 				3FB9E6E71F2DA3FF0000FE80 /* WeeklyViewHeader.swift in Sources */,
-				3FB9E6E51F2DA3A50000FE80 /* InfoCell.swift in Sources */,
+				3FB9E6E51F2DA3A50000FE80 /* TimeCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

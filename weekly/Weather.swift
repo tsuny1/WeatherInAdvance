@@ -49,7 +49,6 @@ struct Weather {
         let convertedDateEnd: Date = dateFormatter.date(from: endTime)!
 
         let calendar = Calendar.current
-        let myCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
         let dayOfTheWeekBeginning = Helper.getDayOfWeek(date: convertedDateBeginning)!
         let hourBeginning = calendar.component(.hour, from: convertedDateBeginning)
         let dayBeginning = calendar.component(.day, from: convertedDateBeginning)
@@ -62,8 +61,6 @@ struct Weather {
     
         
         guard let temperature = json["temperature"] as? Int else {throw SerializationError.missing("temp is missing")}
-        
-//        guard let percentChanceOfRain = json["temperatureMax"] as? Double else {throw SerializationError.missing("temp is missing")}
         
 
         
@@ -83,7 +80,6 @@ struct Weather {
     
     static func forecast (completion: @escaping ([Weather]) -> ()) {
         
-//        let url = basePath + location
         let url = basePath
         let request = URLRequest(url: URL(string: url)!)
         
@@ -97,7 +93,6 @@ struct Weather {
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
                         if let dailyForecasts = json["properties"] as? [String:Any] {
                             if let dailyData = dailyForecasts["periods"] as? [[String:Any]]  {
-//                                print(dailyData.count)
                                 for dataPoint in dailyData {
                                     if let weatherObject = try? Weather(json: dataPoint) {
                                         if(weatherObject.startHour >= 8 && weatherObject.endHour <= 23 ){

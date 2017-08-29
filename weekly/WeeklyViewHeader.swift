@@ -17,7 +17,7 @@ class WeeklyViewHeader: UICollectionReusableView {
         
         super.init(frame: frame)
 
-        let saveButton: UIButton = UIButton(frame: CGRect(x: self.frame.width / 8 * 2, y: 0, width: self.frame.width / 4, height: self.frame.height  ))
+        let saveButton: UIButton = UIButton(frame: CGRect(x: self.frame.width / 10 * 4, y: 0, width: self.frame.width / 4, height: self.frame.height  ))
         saveButton.backgroundColor = UIColor(red: 55.0/255.0, green: 230.0/255.0, blue: 67.0/255.0, alpha: 1.0)
 
         saveButton.setTitle("Save", for: .normal)
@@ -25,7 +25,7 @@ class WeeklyViewHeader: UICollectionReusableView {
         
         saveButton.titleLabel?.font =  UIFont(name: "Arial", size: 20)
 
-        let deleteButton: UIButton = UIButton(frame: CGRect(x: self.frame.width / 8 * 5, y: 0, width: self.frame.width / 4, height: self.frame.height  ))
+        let deleteButton: UIButton = UIButton(frame: CGRect(x: self.frame.width / 10 * 7, y: 0, width: self.frame.width / 4, height: self.frame.height  ))
         deleteButton.backgroundColor = UIColor(red: 252.0/255.0, green: 62.0/255.0, blue: 62.0/255.0, alpha: 1.0)
         deleteButton.setTitle("Delete", for: .normal)
         deleteButton.titleLabel?.font =  UIFont(name: "Arial", size: 20)
@@ -72,5 +72,5 @@ class WeeklyViewHeader: UICollectionReusableView {
 protocol HeaderDelegate {
     func didPressButton(index:Int)
     func handleDeleteButton(index:Int)
-
+    func isSaveButtonDisabled() -> Bool
 }

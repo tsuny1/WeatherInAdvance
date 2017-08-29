@@ -38,8 +38,8 @@ UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate, WeeklyLayoutDele
         
         appsCollectionView.delegate = self
         appsCollectionView.dataSource = self
-        appsCollectionView.register(TimeLabelCell.self, forCellWithReuseIdentifier: "timeLabelCell")
-        appsCollectionView.register(InfoCell.self, forCellWithReuseIdentifier: "infoCell")
+        appsCollectionView.register(LabelCell.self, forCellWithReuseIdentifier: "LabelCell")
+        appsCollectionView.register(TimeCell.self, forCellWithReuseIdentifier: "TimeCell")
         appsCollectionView.allowsMultipleSelection = false
         appsCollectionView.backgroundColor = UIColor.gray
         addContraintsWithFormat("H:|[v0]|", views: appsCollectionView, viewItself: self)
@@ -84,11 +84,11 @@ UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate, WeeklyLayoutDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if(indexPath.row < timeArray.count){
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timeLabelCell", for: indexPath) as! TimeLabelCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LabelCell", for: indexPath) as! LabelCell
             cell.timeLabel.text = timeArray[indexPath.row]
             return cell
         }
-         let rightCell = collectionView.dequeueReusableCell(withReuseIdentifier: "infoCell", for: indexPath) as! InfoCell
+         let rightCell = collectionView.dequeueReusableCell(withReuseIdentifier: "TimeCell", for: indexPath) as! TimeCell
        rightCell.removeLabel()
         rightCell.isSelected = arrayOfBoolean[indexPath.row - timeArray.count]
 

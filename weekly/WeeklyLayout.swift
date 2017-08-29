@@ -8,16 +8,12 @@
 
 import UIKit
 class weeklyLayout: UICollectionViewLayout {
-    var delegate: WeeklyLayoutDelegate!
-    // 2
+    var delegate: WeeklyLayoutDelegate!  
     var numberOfColumns = 2
     
-    // 3
     var numberOfRows = 0
     private var cache = [UICollectionViewLayoutAttributes]()
-    
-    // 4
-    private var contentHeight: CGFloat  = 100
+        private var contentHeight: CGFloat  = 100
     private var contentWidth: CGFloat {
         let insets = collectionView!.bounds.width
         return insets
@@ -53,10 +49,10 @@ class weeklyLayout: UICollectionViewLayout {
                 }
                 let frame : CGRect
                 if(column == 0) {
-                    frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth / 2, height: height)
+                    frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth * 0.6, height: height)
                 }
                 else {
-                    frame = CGRect(x: xOffset[column] / 2, y: yOffset[column], width: columnWidth * 1.5, height: height)
+                    frame = CGRect(x: xOffset[column] * 0.6, y: yOffset[column], width: columnWidth * 1.4, height: height)
                 }
                 let insetFrame = frame.insetBy(dx: 0.0, dy: 0.0)
                 
