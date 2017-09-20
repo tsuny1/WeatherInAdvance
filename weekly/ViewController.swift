@@ -12,8 +12,11 @@ import UserNotifications
 import CoreData
 import CoreLocation
 
+
 class ViewController: UIViewController {
     let eventStore = EKEventStore()
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initNotificationSetupCheck()
@@ -62,7 +65,41 @@ class ViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        setUpNotification()
+        
+    }
+    func setUpNotification() {
+        
+        let status = CLLocationManager.authorizationStatus()
+        print(status)
+        if status == .notDetermined || status == .denied  {
+            
+            // present an alert indicating location authorization required
+            // and offer to take the user to Settings for the app via
+            // UIApplication -openUrl: and UIApplicationOpenSettingsURLString
+            
+            print("LOLZ")
+            
+            //            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
+            
+            
+        }
+        
+        if(status == .authorizedWhenInUse || status == .authorizedAlways) {
+            let defaults = UserDefaults.standard
+            var latitude = (locationManager.location?.coordinate.latitude)!
+            var longitude = (locationManager.location?.coordinate.longitude)!
+            defaults.set(latitude, forKey: "latitude")
+            defaults.set(longitude, forKey: "longitude")
 
+        }
+        
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -87,7 +124,6 @@ class ViewController: UIViewController {
     }
     
     func pressImport(button: UIButton) {
-
         let calendars = eventStore.calendars(for: .event)
         for calendar in calendars {
             
@@ -97,30 +133,32 @@ class ViewController: UIViewController {
             let predicate = eventStore.predicateForEvents(withStart: oneMonthAgo as Date, end: oneMonthAfter as Date, calendars: [calendar])
             
             let events = eventStore.events(matching: predicate)
-
+            
             for event in events {
                 let calendar = Calendar.current
                 let eventStartDate = event.startDate
                 let eventEndDate = event.endDate
                 let startHour = calendar.component(.hour, from: eventStartDate)
-                let startDayOfTheWeek = calendar.component(.weekday, from: eventStartDate)
-
+                let startDayOfTheWeek = (calendar.component(.weekday, from: eventStartDate) - 1) % 7
+                
                 let startMinute = calendar.component(.minute, from: eventStartDate)
-
+                
                 let endHour = calendar.component(.hour, from: eventEndDate)
                 let endMinute = calendar.component(.minute, from: eventEndDate)
-
+                
                 do {
                     let p1 = NSPredicate(format: "beginningTimeHour <= %d", startHour)
                     let p2 = NSPredicate(format: "endTimeHour >= %d", endHour)
                     let fetchRequest:NSFetchRequest<SlotEntity> = SlotEntity.fetchRequest()
                     let slotEntityClassName:String = String(describing: SlotEntity.self)
-
+                    
                     let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [p1,p2])
                     fetchRequest.predicate = predicate
-
+                    
                     let fetchResults = try DatabaseController.getContext().fetch(fetchRequest)
                     if !event.isAllDay && fetchResults.count == 0 {
+                        print(startDayOfTheWeek)
+
                         let sampleSlotEntity = NSEntityDescription.insertNewObject(forEntityName: slotEntityClassName, into: DatabaseController.getContext()) as! SlotEntity
                         
                         sampleSlotEntity.beginningTimeHour = Int16(startHour)
@@ -131,7 +169,7 @@ class ViewController: UIViewController {
                         sampleSlotEntity.dayOfTheWeek = Int16(startDayOfTheWeek)
                         sampleSlotEntity.name = event.title
                         sampleSlotEntity.location = event.location
-
+                        
                     }
                     
                 } catch {

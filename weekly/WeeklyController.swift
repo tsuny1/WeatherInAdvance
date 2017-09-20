@@ -26,6 +26,7 @@ class weeklyViewController: UICollectionViewController,UICollectionViewDelegateF
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         setUpWeeklySlots()
         arrayOfChecked = Array(repeating: Array(repeating: false, count: timeArray.count * 4), count: daysOfTheWeek.count)
@@ -99,6 +100,7 @@ class weeklyViewController: UICollectionViewController,UICollectionViewDelegateF
                 let endTimeMinute = Int(result.endTimeMinute)
                 let name = result.name
                 let location = result.location
+             
                 let newBlock = Slots(name: name!, location: location!, beginningTimeHour: beginningTimeHour, beginningTimeMinute:beginningTimeMinute, endingTimeHour: endTimeHour, endingTimeMinute: endTimeMinute, dayOfTheWeek:dayOfTheWeek)
                 weeklySlots[dayOfTheWeek].addTime(newTime: newBlock)
             }

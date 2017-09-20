@@ -30,7 +30,7 @@ class Helper{
     }
     static func getDayOfWeek(date: Date)->Int? {
         let myCalendar = NSCalendar.current
-        let myComponents = myCalendar.dateComponents([.day,.month,.year,.weekday], from: Date())
+        let myComponents = myCalendar.dateComponents([.day,.month,.year,.weekday], from: date)
         let weekDay = myComponents.weekday
         return weekDay
     }

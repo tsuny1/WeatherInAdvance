@@ -22,6 +22,8 @@
 	<true/>
 	<key>NSCalendarsUsageDescription</key>
 	<string>This app needs permission to access your calendar</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs location permission to determine weather</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
